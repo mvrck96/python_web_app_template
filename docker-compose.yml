@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: app_name_here
+    image: image_name_here
+    build:
+      context: .
+      dockerfile: ./Dockerfile # Where to find Dockerfile ?
+    restart: always
+    volumes:
+      - specify_your_volumes
+    links: 
+      - db # If you gonna use data base or you want to link different docker container, type it's name here 
+  
+  db:
+    image: postgres
+    container_name: db_container_here
+    environment: 
+      POSTGRES_DB: postgres # Specs for creating postgres database
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/db # Where to store database files
+    volumes:
+      - ./initdb/init.sql:/docker-entrypoint-initdb.d/init.sql # Copy scripts to initialize database to [1]:[2] folder
+    ports:
+      - 9696:5432 # Port mapping to acceses db with pgadmin or different db frontend wrappers. Format --> HOST:CONTAINER

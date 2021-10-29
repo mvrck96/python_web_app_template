@@ -1,0 +1,8 @@
+# To ensure app dependencies are ported from your virtual environment/host machine into your container, run 'pip freeze > requirements.txt' in the terminal to overwrite this file
+psycopg2
+loguru
+flask
+requests
+pandas
+beautifulsoup4
+streamlit==1.0.0
